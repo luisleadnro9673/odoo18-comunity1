@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_account_tax_group_afip_form" model="ir.ui.view">
+        <field name="model">account.tax.group</field>
+        <field name="name">account_tax_group_afip.form</field>
+        <field name="inherit_id" ref="account.view_tax_group_form"/>
+	<field name="arch" type="xml">
+		<field name="sequence" position="after">
+			<field name="tax_type" />
+		</field>
+	</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,45 @@
+services:
+
+  web:
+    image: luisleandro9673/odoo-18-comunity-afip:latest
+    container_name: odoo18-app
+    depends_on:
+      - db
+    command: ["odoo", "-c", "/etc/odoo.conf"]
+    ports:
+      - "8071:8069"
+    environment:
+      HOST: db
+      PORT: 5432
+      USER: odoo
+      PASSWORD: odoo
+      DB_NAME: postgres
+    volumes:
+      - filestore-data:/var/lib/odoo/.local/share/Odoo/filestore
+      - ./addons:/mnt/extra-addons
+      # Aquí montamos el archivo directamente:
+      - ./config/odoo.conf:/etc/odoo.conf
+    networks:
+      - odoo-net
+    restart: always
+
+  db:
+    image: postgres:13
+    container_name: odoo18-db
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - odoo-net
+
+volumes:
+  db-data:
+  filestore-data:
+
+networks:
+  odoo-net:
+    driver: bridge
