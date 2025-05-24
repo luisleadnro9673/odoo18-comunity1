@@ -1,6 +1,18 @@
-version: "3.8"
+version: "3.9"
 
 services:
+  db:
+    image: postgres:13
+    container_name: odoo18-db
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - odoo-net
 
   web:
     image: luisleandro9673/odoo-18-comunity-afip:latest
@@ -25,23 +37,9 @@ services:
       - odoo-net
     restart: always
 
-  db:
-    image: postgres:13
-    container_name: odoo18-db
-    restart: always
-    environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: odoo
-      POSTGRES_PASSWORD: odoo
-    volumes:
-      - db-data:/var/lib/postgresql/data
-    networks:
-      - odoo-net
-
 volumes:
   db-data:
   filestore-data:
 
 networks:
   odoo-net:
-    driver: bridge
