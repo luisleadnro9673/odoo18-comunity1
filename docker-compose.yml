@@ -1,9 +1,8 @@
-version: '3.8'
-
 services:
   web:
     image: luisleandro9673/odoo-18-comunity-afip:latest
-    container_name: odoo18_app
+    container_name: odoo18-app
+    command: ["odoo", "-c", "/etc/odoo/odoo.conf"]
     depends_on:
       - db
     ports:
@@ -20,7 +19,7 @@ services:
 
   db:
     image: postgres:13
-    container_name: odoo18_db
+    container_name: odoo18-db
     environment:
       POSTGRES_DB: odoo
       POSTGRES_USER: odoo
