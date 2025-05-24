@@ -2,43 +2,43 @@ services:
 
   web:
     image: luisleandro9673/odoo-18-comunity-afip:latest
-    # <- quito container_name para no romper alias
+    container_name: odoo18-app
     depends_on:
       - db
-    command: ["odoo", "-c", "/etc/odoo/odoo.conf"]
+    command: ["odoo", "-c", "/etc/odoo.conf"]
     ports:
       - "8071:8069"
-    volumes:
-      - ./config/odoo.conf:/etc/odoo/odoo.conf:ro
-      - ./addons:/mnt/extra-addons:ro
-      - odoo-data:/var/lib/odoo
     environment:
-      DB_HOST: db
-      DB_PORT: "5432"
-      DB_USER: odoo
-      DB_PASSWORD: odoo
+      HOST: db
+      PORT: 5432
+      USER: odoo
+      PASSWORD: odoo
+      DB_NAME: postgres
+    volumes:
+      - filestore-data:/var/lib/odoo/.local/share/Odoo/filestore
+      - ./addons:/mnt/extra-addons
+      # Aquí montamos el archivo directamente:
+      - ./config/odoo.conf:/etc/odoo.conf
     networks:
-      odoo-net:
-        aliases:
-          - db
+      - odoo-net
     restart: always
 
   db:
     image: postgres:13
-    # <- idem, sin container_name
+    container_name: odoo18-db
+    restart: always
     environment:
-      POSTGRES_DB: odoo
+      POSTGRES_DB: postgres
       POSTGRES_USER: odoo
       POSTGRES_PASSWORD: odoo
     volumes:
       - db-data:/var/lib/postgresql/data
     networks:
       - odoo-net
-    restart: always
 
 volumes:
   db-data:
-  odoo-data:
+  filestore-data:
 
 networks:
   odoo-net:
