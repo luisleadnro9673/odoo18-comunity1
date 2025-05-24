@@ -7,7 +7,7 @@ services:
       - db
     command: ["odoo", "-c", "/etc/odoo.conf"]
     ports:
-      - "8074:8069"
+      - "8071:8069"
     environment:
       HOST: db
       PORT: 5432
