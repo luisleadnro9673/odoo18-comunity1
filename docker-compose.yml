@@ -7,7 +7,7 @@ services:
       - db
     command: ["odoo", "-c", "/etc/odoo/odoo.conf"]
     ports:
-      - "8069:8069"
+      - "8071:8069"
     volumes:
       - ./config/odoo.conf:/etc/odoo/odoo.conf:ro
       - ./addons:/mnt/extra-addons:ro
