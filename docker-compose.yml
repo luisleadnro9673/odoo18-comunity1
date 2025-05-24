@@ -19,6 +19,7 @@ services:
       - ./addons:/mnt/extra-addons
       # Aquí montamos el archivo directamente:
       - ./config/odoo.conf:/etc/odoo.conf
+      - ./logs:/var/log/odoo
     networks:
       - odoo-net
     restart: always
