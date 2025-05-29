@@ -1,0 +1,37 @@
+.pos .client-window .client-details-contents .client-details-box .client-detail input.styled-checkbox {
+    display: none;
+}
+
+.pos .client-window .client-details-contents .client-details-box .client-detail input.styled-checkbox[type="checkbox"]:checked+label:before {
+    width: 5px;
+    top: -16px;
+    left: 5px;
+    border-radius: 0;
+    opacity: 1;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.pos .client-window .client-details-contents .client-details-box .client-detail input.styled-checkbox[type="checkbox"]+label:before {
+    content: '';
+    display: block;
+    width: 14px;
+    height: 14px;
+    border: 3px solid #6ec89b;
+    position: absolute;
+    left: 5px;
+    top: -12px;
+    opacity: .6;
+    -webkit-transition: all .12s, border-color .08s;
+    transition: all .12s, border-color .08s;
+    border-radius: 3px;
+}
+.pos .client-window .client-details-contents .client-details-box .client-detail input.styled-checkbox[type="checkbox"]+label {
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 20px;
+    color: #ddd;
+    cursor: pointer;
+}
