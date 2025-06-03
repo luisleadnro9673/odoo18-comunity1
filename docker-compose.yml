@@ -2,7 +2,7 @@ services:
 
   web:
     image: luisleandro9673/odoo-18-comunity-afip:latest
-    container_name: odoo18-app
+    # container_name: odoo18-app  ← ¡QUITAR ESTO!
     depends_on:
       - db
     command: ["odoo", "-c", "/etc/odoo.conf"]
@@ -24,7 +24,7 @@ services:
 
   db:
     image: postgres:13
-    container_name: odoo18-db
+    # container_name: odoo18-db  ← ¡QUITAR ESTO TAMBIÉN!
     restart: always
     environment:
       POSTGRES_DB: postgres
