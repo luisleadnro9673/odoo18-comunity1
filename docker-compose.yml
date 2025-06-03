@@ -7,7 +7,7 @@ services:
       - db
     command: ["odoo", "-c", "/etc/odoo.conf"]
     ports:
-      - "8071:8069"
+      - "${ODOO_PORT:-8071}:8069"
     environment:
       HOST: db
       PORT: 5432
@@ -17,7 +17,6 @@ services:
     volumes:
       - filestore-data:/var/lib/odoo/.local/share/Odoo/filestore
       - ./addons:/mnt/extra-addons
-      # Aquí montamos el archivo directamente:
       - ./config/odoo.conf:/etc/odoo.conf
     networks:
       - odoo-net
